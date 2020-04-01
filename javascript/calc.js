@@ -13,7 +13,7 @@ function perguntaIdade() {
     ageField.type = "number"
     testField.appendChild(ageField)
     ageField.id = "age"
-    age = document.getElementById("age")
+    age = document.querySelector("#age")
     criaBtn()
     document.getElementsByTagName("button")[0].setAttribute("onclick", "calcIdade()");
 }
@@ -38,16 +38,48 @@ function calcIdade() {
         alert("Digite uma idade válida")
     }
     else if (thisAge < 45) {
-        // Passar para próxima pergunta
+        perguntaSexo()
     } else if (thisAge < 55) {
         result += 2
-        // Passar para próxima pergunta
+        perguntaSexo()
     } else if (thisAge < 65) {
         result += 3
-        // Passar para próxima pergunta
+        perguntaSexo()
     } else if (thisAge >= 65) {
         result += 4
-        // Passar para próxima pergunta
+        perguntaSexo()
     }
     console.log(result)
+}
+
+function perguntaSexo() {
+    criaTitulo("Sexo")
+
+    let genderField = document.createElement("select")
+    genderField.setAttribute("id", "sexo");
+    testField.appendChild(genderField)
+
+    let masc = document.createElement("option");
+    masc.setAttribute("value", "masculino");
+    let mascValue = document.createTextNode("Masculino");
+    masc.appendChild(mascValue);
+    document.querySelector("#sexo").appendChild(masc); 
+
+    let fem = document.createElement("option");
+    fem.setAttribute("value", "feminino");
+    let femValue = document.createTextNode("Feminino");
+    fem.appendChild(femValue);
+    document.querySelector("#sexo").appendChild(fem);     
+    criaBtn()
+    sexo = document.querySelector('select')
+    document.getElementsByTagName("button")[0].setAttribute("onclick", "getSexo()");
+}
+
+function getSexo() {
+    if(this.sexo.value == 'masculino') {
+
+    }
+    else {
+        
+    }
 }
