@@ -71,12 +71,8 @@ function perguntaSexo() {
     fem.appendChild(femValue);
     document.querySelector("#sexo").appendChild(fem);
 
-    criaBtn("calcSexo()")
+    criaBtn("perguntaCintura()")
     sexo = document.querySelector('select')
-}
-
-function calcSexo() {
-    perguntaCintura()
 }
 
 function perguntaCintura() {
@@ -121,5 +117,44 @@ function calcCintura() {
 }
 
 function perguntaPeso() {
+    criaTitulo("Peso")
+    let weightField = document.createElement("input")
+    weightField.type = "number"
+    testField.appendChild(weightField)
+    weightField.id = "weight"
+    peso = document.querySelector("#weight")
+    criaBtn("validaPeso()")
+}
 
+function validaPeso() {
+    if (peso.value <= 0) {
+        alert("Digite um peso válido")
+    }
+    else {
+        perguntaAltura()
+    }
+}
+
+function perguntaAltura() {
+    criaTitulo("Altura (em cm)")
+    let heightField = document.createElement("input")
+    heightField.type = "number"
+    testField.appendChild(heightField)
+    heightField.id = "height"
+    altura = document.querySelector("#height")
+    criaBtn("calculaImc()")
+}
+
+function calculaImc() {
+    quadradoDaAltura = Math.pow((altura.value/100), 2)
+    const imc = peso.value / quadradoDaAltura
+    if (imc > 25) {
+        //Passar para a próxima pergunta
+    } else if (imc > 30) {
+        result += 1
+        //Passar para a próxima pergunta
+    } else {
+        result += 3
+        //Passar para a próxima pergunta
+    }
 }
