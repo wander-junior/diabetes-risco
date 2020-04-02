@@ -1,6 +1,8 @@
-let beggin = document.querySelector("#iniciar")
+const beggin = document.querySelector("#iniciar")
 let testField = document.querySelector("#teste")
 let result = 0
+let weight = 0
+let height = 0
 
 // Começa o teste pela pergunta da idade
 beggin.onclick = function() {
@@ -14,8 +16,7 @@ function perguntaIdade() {
     testField.appendChild(ageField)
     ageField.id = "age"
     age = document.querySelector("#age")
-    criaBtn()
-    document.getElementsByTagName("button")[0].setAttribute("onclick", "calcIdade()");
+    criaBtn("calcIdade()")
 }
 
 function criaTitulo(titulo){
@@ -25,15 +26,15 @@ function criaTitulo(titulo){
     testField.appendChild(questionTitle)
 }
 
-function criaBtn() {
+function criaBtn(funcao) {
     let nextBtn = document.createElement("button")
     nextBtn.innerHTML = "Próximo"
+    nextBtn.setAttribute('onclick', funcao)
     testField.appendChild(nextBtn)
 }
 
 function calcIdade() {
     thisAge = (this.age.value)
-    console.log(thisAge)
     if (thisAge <= 0) {
         alert("Digite uma idade válida")
     }
@@ -49,7 +50,6 @@ function calcIdade() {
         result += 4
         perguntaSexo()
     }
-    console.log(result)
 }
 
 function perguntaSexo() {
@@ -69,17 +69,57 @@ function perguntaSexo() {
     fem.setAttribute("value", "feminino");
     let femValue = document.createTextNode("Feminino");
     fem.appendChild(femValue);
-    document.querySelector("#sexo").appendChild(fem);     
-    criaBtn()
+    document.querySelector("#sexo").appendChild(fem);
+
+    criaBtn("calcSexo()")
     sexo = document.querySelector('select')
-    document.getElementsByTagName("button")[0].setAttribute("onclick", "getSexo()");
 }
 
-function getSexo() {
-    if(this.sexo.value == 'masculino') {
+function calcSexo() {
+    perguntaCintura()
+}
 
+function perguntaCintura() {
+    criaTitulo("Medida da cintura(em cm)")
+
+    let waistField = document.createElement("input")
+    waistField.setAttribute("type", "number")
+    testField.appendChild(waistField)
+    waist = document.querySelector("input")
+    criaBtn("calcCintura()")
+}
+
+function calcCintura() {
+    waist = this.waist.value
+    if(this.sexo.value == 'masculino'){
+        if (waist <= 0) {
+            alert("Digite uma medida válida")
+        }
+        else if (waist < 94) {
+            perguntaPeso()
+        } else if (waist < 102) {
+            result += 3
+            perguntaPeso()
+        } else {
+            result += 4
+            perguntaPeso()
+        }
+    } else {
+        if (waist <= 0) {
+            alert("Digite uma medida válida")
+        }
+        else if (waist < 80) {
+            perguntaPeso()
+        } else if (waist < 88) {
+            result += 3
+            perguntaPeso()
+        } else {
+            result += 4
+            perguntaPeso()
+        }
     }
-    else {
-        
-    }
+}
+
+function perguntaPeso() {
+
 }
