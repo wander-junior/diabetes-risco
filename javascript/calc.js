@@ -55,24 +55,27 @@ function calcIdade() {
 function perguntaSexo() {
     criaTitulo("Sexo")
 
-    let genderField = document.createElement("select")
-    genderField.setAttribute("id", "sexo");
-    testField.appendChild(genderField)
-
-    let masc = document.createElement("option");
-    masc.setAttribute("value", "masculino");
-    let mascValue = document.createTextNode("Masculino");
-    masc.appendChild(mascValue);
-    document.querySelector("#sexo").appendChild(masc); 
-
-    let fem = document.createElement("option");
-    fem.setAttribute("value", "feminino");
-    let femValue = document.createTextNode("Feminino");
-    fem.appendChild(femValue);
-    document.querySelector("#sexo").appendChild(fem);
+    criaSelect("Masculino", "Feminino")
 
     criaBtn("perguntaCintura()")
     sexo = document.querySelector('select')
+}
+
+function criaSelect(option1, option2, value1=option1, value2=option2) {
+    let selectField = document.createElement("select")
+    testField.appendChild(selectField)
+
+    let select1 = document.createElement("option")
+    select1.setAttribute("value", value1)
+    let select1Value = document.createTextNode(option1)
+    select1.appendChild(select1Value)
+    document.querySelector("select").appendChild(select1)
+
+    let select2 = document.createElement("option")
+    select2.setAttribute("value", value2)
+    let select2Value = document.createTextNode(option2)
+    select2.appendChild(select2Value)
+    document.querySelector("select").appendChild(select2)
 }
 
 function perguntaCintura() {
@@ -87,7 +90,7 @@ function perguntaCintura() {
 
 function calcCintura() {
     waist = this.waist.value
-    if(this.sexo.value == 'masculino'){
+    if(this.sexo.value == 'Masculino'){
         if (waist <= 0) {
             alert("Digite uma medida válida")
         }
@@ -149,12 +152,19 @@ function calculaImc() {
     quadradoDaAltura = Math.pow((altura.value/100), 2)
     const imc = peso.value / quadradoDaAltura
     if (imc > 25) {
-        //Passar para a próxima pergunta
+        perguntaAtvFisica()
     } else if (imc > 30) {
         result += 1
-        //Passar para a próxima pergunta
+        perguntaAtvFisica()
     } else {
         result += 3
-        //Passar para a próxima pergunta
+        perguntaAtvFisica()
     }
+}
+
+function perguntaAtvFisica() {
+    criaTitulo("Pratica, diariamente, atividade física pelo menos durante 30 minutos, no trabalho ou durante o tempo livre (incluindo atividades da vida diária)?")
+    criaSelect("Sim", "Não", "sim", "nao")
+    criaBtn()
+    atvFisica = document.querySelector('select')
 }
