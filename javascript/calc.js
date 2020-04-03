@@ -6,10 +6,6 @@ let height = 0
 
 // Começa o teste pela pergunta da idade
 beggin.onclick = function() {
-    perguntaIdade()
-}
-
-function perguntaIdade() {
     criaTitulo("Idade")
     let ageField = document.createElement("input")
     ageField.type = "number"
@@ -165,6 +161,17 @@ function calculaImc() {
 function perguntaAtvFisica() {
     criaTitulo("Pratica, diariamente, atividade física pelo menos durante 30 minutos, no trabalho ou durante o tempo livre (incluindo atividades da vida diária)?")
     criaSelect("Sim", "Não", "sim", "nao")
-    criaBtn()
+    criaBtn("perguntaDieta()")
     atvFisica = document.querySelector('select')
+}
+
+function perguntaDieta() {
+    //Faz pontuação da pergunta anterior
+    if(atvFisica.value = 'nao') {
+        result += 2
+    }
+    criaTitulo("Com que regularidade come vegetais e/ou fruta (sopa, salada, legumes cozidos, entre outros)?")
+    criaSelect("Sim", "Não", "sim", "nao")
+    criaBtn()
+    dieta = document.querySelector('select')
 }
