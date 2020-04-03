@@ -177,6 +177,17 @@ function perguntaMedicamentos() {
     }
     criaTitulo("Toma regularmente ou já tomou alguns medicamentos para a Hipertensão Arterial?")
     criaSelect("Sim", "Não", "sim", "nao")
-    criaBtn()
+    criaBtn("perguntaAcucar()")
     medicacao = document.querySelector('select')
+}
+
+function perguntaAcucar() {
+    //Faz pontuação da pergunta anterior
+    if(medicacao.value == 'sim') {
+        result += 5
+    }
+    criaTitulo("Alguma vez teve açúcar elevado no sangue (ex.: num exame de saúde, durante um período de doença ou durante a gravidez)?")
+    criaSelect("Sim", "Não", "sim", "nao")
+    criaBtn()
+    acucar = document.querySelector('select')
 }
