@@ -1,8 +1,6 @@
 const beggin = document.querySelector("#iniciar")
 let testField = document.querySelector("#teste")
 let result = 0
-let weight = 0
-let height = 0
 
 // Funções para facilitar a criação das perguntas (criaTitulo, criaBtn, criaSelect)
 
@@ -37,14 +35,17 @@ function criaSelect(option1, option2, value1=option1, value2=option2) {
     document.querySelector("select").appendChild(select2)
 }
 
+function criaInput(type) {
+    let input = document.createElement("input")
+    input.type = type
+    testField.appendChild(input)
+}
+
 // Começa o teste pela pergunta da idade
 beggin.onclick = function() {
     criaTitulo("Idade")
-    let ageField = document.createElement("input")
-    ageField.type = "number"
-    testField.appendChild(ageField)
-    ageField.id = "age"
-    age = document.querySelector("#age")
+    criaInput("number")
+    age = document.querySelector("input")
     criaBtn("calcIdade()")
 }
 
@@ -78,10 +79,7 @@ function perguntaSexo() {
 
 function perguntaCintura() {
     criaTitulo("Medida da cintura(em cm)")
-
-    let waistField = document.createElement("input")
-    waistField.setAttribute("type", "number")
-    testField.appendChild(waistField)
+    criaInput("number")
     waist = document.querySelector("input")
     criaBtn("calcCintura()")
 }
@@ -119,11 +117,8 @@ function calcCintura() {
 
 function perguntaPeso() {
     criaTitulo("Peso")
-    let weightField = document.createElement("input")
-    weightField.type = "number"
-    testField.appendChild(weightField)
-    weightField.id = "weight"
-    peso = document.querySelector("#weight")
+    criaInput("number")
+    peso = document.querySelector("input")
     criaBtn("validaPeso()")
 }
 
@@ -138,11 +133,8 @@ function validaPeso() {
 
 function perguntaAltura() {
     criaTitulo("Altura (em cm)")
-    let heightField = document.createElement("input")
-    heightField.type = "number"
-    testField.appendChild(heightField)
-    heightField.id = "height"
-    altura = document.querySelector("#height")
+    criaInput("number")
+    altura = document.querySelector("input")
     criaBtn("calculaImc()")
 }
 
