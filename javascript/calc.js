@@ -2,7 +2,7 @@ const beggin = document.querySelector("#iniciar")
 let testField = document.querySelector("#teste")
 let result = 0
 
-// Funções para facilitar a criação das perguntas (criaTitulo, criaBtn, criaSelect)
+// Funções para facilitar a criação das perguntas (criaTitulo, criaBtn, criaSelect, criaInput, cria     )
 
 function criaTitulo(titulo){
     testField.innerHTML = ""
@@ -36,9 +36,30 @@ function criaSelect(option1, option2, value1=option1, value2=option2) {
 }
 
 function criaInput(type) {
+    // Para criação de input com o type "radio", utilizar a função criaInputRadio()
     let input = document.createElement("input")
     input.type = type
     testField.appendChild(input)
+}
+
+function criaInputRadio(...args){
+    args.forEach((texto, idx) => {
+        let inputContainer = document.createElement("div")
+        inputContainer.classList.add("inputContainer")
+
+        let input = document.createElement("input")
+        input.setAttribute("name", "inputRadio")
+        input.setAttribute("id", idx.toString())
+        input.setAttribute("type", "radio")
+        inputContainer.appendChild(input)
+        
+        let label = document.createElement("label")
+        label.setAttribute("for", idx.toString())
+        label.innerText = texto
+        inputContainer.appendChild(label)
+        
+        testField.appendChild(inputContainer)
+    })
 }
 
 // Começa o teste pela pergunta da idade
@@ -188,6 +209,25 @@ function perguntaAcucar() {
     }
     criaTitulo("Alguma vez teve açúcar elevado no sangue (ex.: num exame de saúde, durante um período de doença ou durante a gravidez)?")
     criaSelect("Sim", "Não", "sim", "nao")
-    criaBtn()
+    criaBtn("perguntaHistoricoFamiliar()")
     acucar = document.querySelector('select')
+}
+
+function perguntaHistoricoFamiliar() {
+    criaTitulo("Tem algum membro de família próximo ou outros familiares a quem foi diagnosticado diabetes (Tipo 1 ou Tipo 2)?")
+    criaInputRadio("Não", 
+                   "Sim: pais, irmãos, irmãs ou filhos",
+                   "Sim: avós, tias, tios ou primos em 1º grau (exceto pais, irmão, irmãs ou filhos)"
+    )
+    criaBtn('calcResultado()')
+    opcoes = document.querySelectorAll(".inputContainer input")
+}
+
+function calcResultado() {
+    let opcaoSelecionada
+    opcoes.forEach((opcao) => {
+        if (opcao.checked == true) {
+            opcaoSelecionada = opcao
+        } 
+    })
 }
