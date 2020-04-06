@@ -81,3 +81,7 @@ select {
 .inputContainer label {
     padding-left: 10px;
 }
+
+p {
+    text-align: center;
+}

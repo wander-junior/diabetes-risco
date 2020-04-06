@@ -2,7 +2,8 @@ const beggin = document.querySelector("#iniciar")
 let testField = document.querySelector("#teste")
 let result = 0
 
-// Funções para facilitar a criação das perguntas (criaTitulo, criaBtn, criaSelect, criaInput, cria     )
+// Funções para facilitar a criação das perguntas 
+// (criaTitulo, criaBtn, criaSelect, criaInput, criaInputRadio, criaParagrafo)
 
 function criaTitulo(titulo){
     testField.innerHTML = ""
@@ -60,6 +61,12 @@ function criaInputRadio(...args){
         
         testField.appendChild(inputContainer)
     })
+}
+
+function criaParagrafo(texto) {
+    let paragrafo = document.createElement("p")
+    paragrafo.innerText = texto
+    testField.appendChild(paragrafo)
 }
 
 // Começa o teste pela pergunta da idade
@@ -219,15 +226,44 @@ function perguntaHistoricoFamiliar() {
                    "Sim: pais, irmãos, irmãs ou filhos",
                    "Sim: avós, tias, tios ou primos em 1º grau (exceto pais, irmão, irmãs ou filhos)"
     )
-    criaBtn('calcResultado()')
+    criaBtn('calcHistoricoFamiliar()')
     opcoes = document.querySelectorAll(".inputContainer input")
 }
 
-function calcResultado() {
+function calcHistoricoFamiliar() {
     let opcaoSelecionada
     opcoes.forEach((opcao) => {
         if (opcao.checked == true) {
             opcaoSelecionada = opcao
-        } 
+        }
     })
+    if(opcaoSelecionada.id == 0) {
+        result += 0
+        calcResultado()
+    } else if (opcaoSelecionada.id == 1) {
+        result += 3
+        calcResultado()
+    } else if (opcaoSelecionada.id == 2) {
+        result += 5
+        calcResultado()
+    }
+}
+
+function calcResultado() {
+    if (result < 7) {
+        criaTitulo("Nível de Risco Baixo")
+        criaParagrafo("Calcula-se que 1 em 100 pessoas nesse nível de risco desenvolverá a doença (1%)")
+    } else if (result < 12) {
+        criaTitulo("Nível de Risco Ligeiro")
+        criaParagrafo("Calcula-se que 1 em 25 pessoas desenvolverá a doença (4%)")
+    } else if (result < 15) {
+        criaTitulo("Nível de Risco Moderado")
+        criaParagrafo("Calcula-se que 1 em 6 pessoas desenvolverá a doença (16,6%)")
+    } else if (result < 21) {
+        criaTitulo("Nível de Risco Alto")
+        criaParagrafo("Calcula-se que 1 em 3 pessoas desenvolverá a doença (33,3%)")
+    } else {
+        criaTitulo("Nível de Risco Muito Alto")
+        criaParagrafo("Calcula-se que 1 em 2 pessoas desenvolverá a doença (50%)")
+    }
 }
